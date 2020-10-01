@@ -66,5 +66,6 @@ def activeCases():
     print("CRITICAL CONDITIONS (WorldWide):", criticalCond, "( " + critPercentage + "% )", '\n')
 
 if __name__ == "__main__":
+    print("HELLO TEST FOR GITHUB")
     getPrimeData()
     activeCases()
