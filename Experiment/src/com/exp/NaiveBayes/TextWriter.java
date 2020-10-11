@@ -64,5 +64,10 @@ public class TextWriter {
 			e.printStackTrace();
 		}
 		
+		try {
+			reader.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
