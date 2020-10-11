@@ -1,12 +1,17 @@
 package com.exp.AI;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class TextWriter {
+	private ArrayList<PersonCredentials> listCredentials;
+	
 	public TextWriter() {}
 	
 	public void createFile() {
@@ -39,6 +44,25 @@ public class TextWriter {
 	}
 	
 	public ArrayList<PersonCredentials> readTheFile() throws IOException {
-		// under construction
+		ArrayList<PersonCredentials> createList = new ArrayList<PersonCredentials>();
+		
+		FileInputStream stream = null;
+		try {
+			stream = new FileInputStream("PersonDataBase.txt");
+			
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+		String strline;
+		try {
+			while((strline = reader.readLine()) != null) {
+				
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
