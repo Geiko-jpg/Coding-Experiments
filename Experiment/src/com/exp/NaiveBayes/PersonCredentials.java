@@ -1,4 +1,4 @@
-package com.exp.AI;
+package com.exp.NaiveBayes;
 
 public class PersonCredentials {
 	// - - > DECLARATIONS

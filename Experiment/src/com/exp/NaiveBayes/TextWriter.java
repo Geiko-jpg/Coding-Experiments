@@ -1,4 +1,4 @@
-package com.exp.AI;
+package com.exp.NaiveBayes;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
