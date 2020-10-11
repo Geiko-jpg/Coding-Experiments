@@ -43,7 +43,7 @@ public class TextWriter {
 		}
 	}
 	
-	public ArrayList<PersonCredentials> readTheFile() throws IOException {
+	public void readTheFile() throws IOException {
 		ArrayList<PersonCredentials> createList = new ArrayList<PersonCredentials>();
 		
 		FileInputStream stream = null;
