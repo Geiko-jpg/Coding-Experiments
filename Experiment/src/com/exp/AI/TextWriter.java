@@ -1,7 +1,10 @@
 package com.exp.AI;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TextWriter {
 	public TextWriter() {}
@@ -20,5 +23,22 @@ public class TextWriter {
 		}
 	}
 	
+	public void writeToFile(PersonCredentials xData) {
+		try {
+			PersonCredentials writeTheCredential = xData;
+			FileWriter write = new FileWriter("PersonDataBase.txt", true);
+			BufferedWriter bw = new BufferedWriter(write);
+			
+			bw.write(writeTheCredential.getAge() + "|" + writeTheCredential.getIncome() + "|" + writeTheCredential.isStudent() + "|" +
+			writeTheCredential.getCredit_rating() + "|" + writeTheCredential.isBuys_computer() + "\n");
+			bw.close();
+			
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
+	public ArrayList<PersonCredentials> readTheFile() throws IOException {
+		// under construction
+	}
 }

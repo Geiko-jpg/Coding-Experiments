@@ -10,6 +10,7 @@ public class PersonCredentials {
 	
 	private PersonCredentials(){}
 
+	// - - > BUILD MEMBERS
 	public static class PersonCredentialsBuilder {
 		private int age;
 		private String income;
@@ -53,5 +54,26 @@ public class PersonCredentials {
 			
 			return returnPersonCredentials;
 		}
+	}
+	
+	// - - > GETTERS
+	public int getAge() {
+		return age;
+	}
+
+	public String getIncome() {
+		return income;
+	}
+
+	public boolean isStudent() {
+		return student;
+	}
+
+	public String getCredit_rating() {
+		return credit_rating;
+	}
+
+	public boolean isBuys_computer() {
+		return buys_computer;
 	}
 }
