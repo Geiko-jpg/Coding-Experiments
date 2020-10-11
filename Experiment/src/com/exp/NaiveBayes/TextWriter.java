@@ -44,7 +44,7 @@ public class TextWriter {
 	}
 	
 	public void readTheFile() throws IOException {
-		ArrayList<PersonCredentials> createList = new ArrayList<PersonCredentials>();
+		ArrayList<String> createList = new ArrayList<String>();
 		
 		FileInputStream stream = null;
 		try {
@@ -58,16 +58,22 @@ public class TextWriter {
 		String strline;
 		try {
 			while((strline = reader.readLine()) != null) {
-				
+				createList.add(strline);
 			}
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
+		
+		parsingList(createList);
 		
 		try {
 			reader.close();
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void parsingList(ArrayList<String> xList) {
+		
 	}
 }
