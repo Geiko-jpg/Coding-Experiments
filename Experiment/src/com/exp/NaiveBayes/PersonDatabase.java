@@ -10,8 +10,8 @@ import com.mysql.jdbc.Statement;
 
 public class PersonDatabase {
     // - - > DECLARATIONS
-    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost/people_entries";
+    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver"; // primary driver for mysql
+    private static final String DB_URL = "jdbc:mysql://localhost/people_entries"; // target database
     private static final String USERNAME = "root";
     private static final String PASS = "Verifone1";
     
