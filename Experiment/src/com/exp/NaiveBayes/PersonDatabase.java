@@ -16,9 +16,9 @@ public class PersonDatabase {
     private static final String PASS = "Verifone1";
     
     // - - > INITIATE LOGGER
-    private static final Logger log = Logger.getLogger(PersonDatabase.class.getName());
+    private static final Logger log = Logger.getLogger(PersonDatabase.class.getName()); // optional
 
-	public void WriteToDatabase(){ //PersonCredentials personInfo
+	public void WriteToDatabase(String fName, String lName){ //PersonCredentials personInfo
         Connection conn = null;
         Statement statement = null;
         
@@ -32,10 +32,7 @@ public class PersonDatabase {
         	System.out.println("Initiate data insertion to database");
         	statement = (Statement) conn.createStatement();
         	
-        	String relay = "INSERT INTO members " + "VALUES (1,'Kyle', 'Degrano')";
-        	statement.executeUpdate(relay);
-        	
-        	relay = "INSERT INTO members " + "VALUES (2,'Khloe', 'Degrano')";
+        	String relay = "INSERT INTO members " + "VALUES (null, '" + fName + "', '" + lName + "')";
         	statement.executeUpdate(relay);
         	
         }catch(SQLException se) {
