@@ -2,6 +2,8 @@
 package com.java.firstExperiment;
 
 import java.sql.DriverManager;
+import java.lang.System.Logger;
+import java.util.*;
 import java.sql.*;
 
 /**
@@ -16,6 +18,7 @@ public class MySqlTest{
     // Database credentials
     private static final String USER = "root";
     private static final String PASS = "Verifone1";
+
     public static void main(String[] args){
         Connection conn = null;
         Statement stmt = null;
@@ -33,10 +36,10 @@ public class MySqlTest{
             System.out.println("Inserting records into the table...");
             stmt = conn.createStatement();
 
-            String sql = "INSERT INTO test " + "VALUES ('Kyle', 'Degrano')";
+            String sql = "INSERT INTO test " + "VALUES (1, 'Kyle', 'Degrano')";
             stmt.executeUpdate(sql);
             
-            sql = "INSERT INTO test " + "VALUES ('Francee', 'Castro')"; 
+            sql = "INSERT INTO test " + "VALUES (2, 'Francee', 'Castro')"; 
             stmt.executeUpdate(sql);
             System.out.println("Inserted records into the table...");
 
