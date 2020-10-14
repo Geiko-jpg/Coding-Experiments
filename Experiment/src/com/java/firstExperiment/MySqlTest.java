@@ -2,8 +2,6 @@
 package com.java.firstExperiment;
 
 import java.sql.DriverManager;
-import java.lang.System.Logger;
-import java.util.*;
 import java.sql.*;
 
 /**
