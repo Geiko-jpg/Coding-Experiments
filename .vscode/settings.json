@@ -1,0 +1,8 @@
+{
+    "java.home": "C:\\Program Files\\Java\\jdk-11.0.7\\",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "y:\\mysql-connector-java-5.1.49.jar",
+        "Experiment/src/com/java/mysql-connector-java-5.1.49.jar"
+    ]
+}
