@@ -15,6 +15,7 @@ public class PredictionApp {
 		
 		PersonDatabase adapter = new PersonDatabase();
 		adapter.WriteToDatabase(fName, lName);
+		adapter.readDatabase();
 	}
 
 }

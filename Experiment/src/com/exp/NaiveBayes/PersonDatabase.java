@@ -55,6 +55,50 @@ public class PersonDatabase {
         		se.printStackTrace();
         	}
         }
-        System.out.println("Concluding database transfer...");
+        System.out.println("Concluding database transfer...\n");
     }
+	
+	public void readDatabase() {
+		Connection conn = null;
+		Statement stmt = null;
+		
+		try {
+			Class.forName(JDBC_DRIVER);
+			System.out.println("Connecting to database for extraction...");
+			
+			conn = DriverManager.getConnection(DB_URL, USERNAME, PASS);
+			System.out.println("Connection established successfully...");
+			System.out.println("\nExtracting Data...");
+			
+			stmt = (Statement)conn.createStatement();
+			String sql = "SELECT id, firstname, lastname FROM members"; // sql command / query
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			// LOOP EXTRACTION
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String firstName = rs.getString("firstname");
+				String lastName = rs.getString("lastname");
+				
+				// Display Values
+				System.out.print("ID: " + id);
+				System.out.print(" | FIRSTNAME: " + firstName);
+				System.out.println(" | LASTNAME: " + lastName + "\n");
+			}
+			rs.close();
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(stmt != null) {
+					conn.close();
+				}
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		System.out.println("END PROCESS ~~");
+	}
 }
