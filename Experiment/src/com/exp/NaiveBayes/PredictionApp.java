@@ -1,11 +1,20 @@
 package com.exp.NaiveBayes;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -16,17 +25,20 @@ public class PredictionApp {
 	private JTable table;
 	private JPanel primePanel;
 	private JScrollPane scrollTable;
+	private JTextField ageField, studentField, incomeField, creditField, buysField; 
+	private static InputStream myStream = null;
 	
 	public PredictionApp(){
 		primaryFrame = new JFrame();
-		primaryFrame.setSize(1200, 700);
+		primaryFrame.setSize(1400, 700);
 		primaryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		primaryFrame.setTitle("Naive Bayes App");
 		primaryFrame.getContentPane().setLayout(null);
-		primaryFrame.setResizable(false);
+		primaryFrame.setResizable(false); 
 		
-		// - - > OPEN TABLE VIEW
+		// - - > MAIN FRAME CONTENTS
 		dataTable();
+		dataEntryArea();
 		
 		primaryFrame.setVisible(true);
 	}
@@ -34,6 +46,38 @@ public class PredictionApp {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new PredictionApp();
+	}
+	
+	public void dataEntryArea() {
+		primePanel = new JPanel();
+		primePanel.setSize(400, 632);
+		primePanel.setLocation(980, 16);
+		primePanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED, Color.LIGHT_GRAY, Color.GRAY));
+		primePanel.setLayout(null);
+		
+		// - - > ADD NEW FONT 
+		try {
+			myStream = new BufferedInputStream(new FileInputStream("src\\com\\exp\\NaiveBayes\\AccidentalPresidency.ttf"));
+			Font font = Font.createFont(Font.TRUETYPE_FONT, myStream);
+			JLabel mastHead = new JLabel("NAIVE BAYES APP");
+			mastHead.setFont(font.deriveFont(Font.PLAIN, 48));
+			
+			mastHead.setLocation(80, 1);
+			mastHead.setSize(250, 50);
+			
+			primePanel.add(mastHead);
+		}catch(FontFormatException | IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		// - - > INPUT DATA
+		JLabel ageLabel = new JLabel("AGE:");
+		ageLabel.setSize(50, 25);
+		ageLabel.setLocation(10, 70);
+		ageLabel.setFont(new Font("Arial", Font.BOLD, 14));
+		primePanel.add(ageLabel);
+		
+		primaryFrame.getContentPane().add(primePanel);
 	}
 	
 	public void dataTable() {
