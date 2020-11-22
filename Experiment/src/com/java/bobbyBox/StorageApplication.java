@@ -82,7 +82,11 @@ public class StorageApplication {
 					retoOpt = scan.nextInt();
 					break;
 				case 3:
-					getItem();
+					try{
+						getItem();
+					}catch(NullPointerException npe) {
+						npe.printStackTrace();
+					}
 					System.out.print("\nRETURN? [Y=1 | N=2]: ");
 					retoOpt = scan.nextInt();
 					break;
