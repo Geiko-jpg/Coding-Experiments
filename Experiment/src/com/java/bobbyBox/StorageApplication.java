@@ -8,7 +8,7 @@ public class StorageApplication {
 	private static Scanner scan = new Scanner(System.in);
 	
 	private StorageApplication(int cap){
-		bobbyStorage = new String[this.cap]; // - - > INITIALIZE
+		bobbyStorage = new String[cap]; // - - > INITIALIZE
 	}
 	
 	public static void main(String[] args) {
