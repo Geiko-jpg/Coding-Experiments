@@ -296,14 +296,22 @@ public class PredictionApp implements ActionListener{
 			
 			// - - > FILTER
 			int ageFilter = 0;
+			String ageLabel = null;
 			try {
 				ageFilter = Integer.parseInt(ageField.getText().toString());
+				if(ageFilter <= 30) {
+					ageLabel = "lower age";
+				} else if(ageFilter > 30 && ageFilter <= 40) {
+					ageLabel = "middle age";
+				}else {
+					ageLabel = "adulthood age";
+				}
 			}catch(NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
 			
 			PersonCredentials pCreds = new PersonCredentials.PersonCredentialsBuilder()
-					.setAge(ageFilter)
+					.setAge(ageLabel)
 					.setIncome(incomeField.getText().toString())
 					.setStudent(status)
 					.setCreditRating(creditField.getText().toString())

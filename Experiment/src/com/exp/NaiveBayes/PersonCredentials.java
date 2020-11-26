@@ -2,7 +2,7 @@ package com.exp.NaiveBayes;
 
 public class PersonCredentials {
 	// - - > DECLARATIONS
-	private int age;
+	private String age;
 	private String income;
 	private String student;
 	private String credit_rating;
@@ -12,13 +12,13 @@ public class PersonCredentials {
 
 	// - - > BUILD MEMBERS
 	public static class PersonCredentialsBuilder {
-		private int age;
+		private String age;
 		private String income;
 		private String student;
 		private String credit_rating;
 		private String buys_computer;
 		
-		public PersonCredentialsBuilder setAge (int xAge) {
+		public PersonCredentialsBuilder setAge (String xAge) {
 			this.age = xAge;
 			return this;
 		}
@@ -57,7 +57,7 @@ public class PersonCredentials {
 	}
 	
 	// - - > GETTERS
-	public int getAge() {
+	public String getAge() {
 		return age;
 	}
 
