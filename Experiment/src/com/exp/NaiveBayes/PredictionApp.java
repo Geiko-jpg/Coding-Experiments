@@ -11,6 +11,7 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -40,6 +41,8 @@ public class PredictionApp implements ActionListener{
 	private String status, buys_status;
 	private JButton submitButton, resetButton, exitButton;
 	private PersonDatabase pdb;
+	private DefaultTableModel tableModel;
+	private ArrayList<PersonCredentials>list = new ArrayList<PersonCredentials>();
 	private static InputStream myStream = null, secondStream = null;
 	
 	public PredictionApp(){
@@ -258,8 +261,8 @@ public class PredictionApp implements ActionListener{
 		columnsData[3] = "CREDIT RATING";
 		columnsData[4] = "BUYS COMPUTER";
 		
-		TableModel tableData = new DefaultTableModel(columnsData, 0);
-		table = new JTable(tableData);
+		tableModel = new DefaultTableModel(columnsData, 0);
+		table = new JTable(tableModel);
 		
 		scrollTable = new JScrollPane(table);
 		scrollTable.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
@@ -274,6 +277,18 @@ public class PredictionApp implements ActionListener{
 		table.getColumnModel().getColumn(2).setCellRenderer(centerRend);
 		table.getColumnModel().getColumn(3).setCellRenderer(centerRend);
 		table.getColumnModel().getColumn(4).setCellRenderer(centerRend);
+		
+		// - - > DISPLAY DATA TO THE TABLE
+		for(PersonCredentials pc:PersonDatabase.readDatabase()) {
+			Object[] row = new Object[5];
+			row[0] = pc.getAge();
+			row[1] = pc.isStudent();
+			row[2] = pc.getIncome();
+			row[3] = pc.getCredit_rating();
+			row[4] = pc.isBuys_computer();
+			
+			tableModel.addRow(row);
+		}
 	}
 
 	@Override
@@ -326,6 +341,16 @@ public class PredictionApp implements ActionListener{
 			pdb = new PersonDatabase(pCreds);
 			pdb.WriteToDatabase();
 			
+			ageField.setText(null); // RESET FIELDS
+			incomeField.setText(null);
+			creditField.setText(null);
+			studentButtonGroup.clearSelection(); status = null;
+			buysButtonGroup.clearSelection(); buys_status = null;
+			
+		}else if(e.getSource().equals(exitButton)) {
+			System.exit(0);
+			
+		}else if(e.getSource().equals(resetButton)) {
 			ageField.setText(null); // RESET FIELDS
 			incomeField.setText(null);
 			creditField.setText(null);

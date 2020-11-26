@@ -3,6 +3,7 @@ package com.exp.NaiveBayes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.sql.*;
 
@@ -65,7 +66,8 @@ public class PersonDatabase {
         System.out.println("Concluding database transfer...\n");
     }
 	
-	public void readDatabase() {
+	public static ArrayList<PersonCredentials> readDatabase() {
+		ArrayList<PersonCredentials> transfer = new ArrayList<PersonCredentials>();
 		Connection conn = null;
 		Statement stmt = null;
 		
@@ -78,19 +80,25 @@ public class PersonDatabase {
 			System.out.println("\nExtracting Data...");
 			
 			stmt = (Statement)conn.createStatement();
-			String sql = "SELECT id, firstname, lastname FROM members_data"; // sql command / query
+			String sql = "SELECT member_age, member_income, member_student, member_creditrating, member_buyscomputer FROM members_data"; // sql command / query
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			// LOOP EXTRACTION
 			while(rs.next()) {
-				int id = rs.getInt("id");
-				String firstName = rs.getString("firstname");
-				String lastName = rs.getString("lastname");
+				String age = rs.getString("member_age");
+				String income = rs.getString("member_income");
+				String student = rs.getString("member_student");
+				String creditRating = rs.getString("member_creditrating");
+				String buysComputer = rs.getString("member_buyscomputer");
 				
-				// Display Values
-				System.out.print("ID: " + id);
-				System.out.print(" | FIRSTNAME: " + firstName);
-				System.out.println(" | LASTNAME: " + lastName + "\n");
+				PersonCredentials buildEntry = new PersonCredentials.PersonCredentialsBuilder()
+						.setAge(age)
+						.setIncome(income)
+						.setStudent(student)
+						.setCreditRating(creditRating)
+						.setBuysComputer(buysComputer)
+						.build();
+				transfer.add(buildEntry);
 			}
 			rs.close();
 		}catch(SQLException se) {
@@ -107,5 +115,6 @@ public class PersonDatabase {
 			}
 		}
 		System.out.println("END PROCESS ~~");
+		return transfer;
 	}
 }
