@@ -4,9 +4,9 @@ public class PersonCredentials {
 	// - - > DECLARATIONS
 	private int age;
 	private String income;
-	private boolean student;
+	private String student;
 	private String credit_rating;
-	private boolean buys_computer;
+	private String buys_computer;
 	
 	private PersonCredentials(){}
 
@@ -14,9 +14,9 @@ public class PersonCredentials {
 	public static class PersonCredentialsBuilder {
 		private int age;
 		private String income;
-		private boolean student;
+		private String student;
 		private String credit_rating;
-		private boolean buys_computer;
+		private String buys_computer;
 		
 		public PersonCredentialsBuilder setAge (int xAge) {
 			this.age = xAge;
@@ -29,7 +29,7 @@ public class PersonCredentials {
 			
 		}
 		
-		public PersonCredentialsBuilder setStudent (boolean xStudent) {
+		public PersonCredentialsBuilder setStudent (String xStudent) {
 			this.student = xStudent;
 			return this;
 		}
@@ -39,7 +39,7 @@ public class PersonCredentials {
 			return this;
 		}
 		
-		public PersonCredentialsBuilder setBuysComputer (boolean xBuysComputer) {
+		public PersonCredentialsBuilder setBuysComputer (String xBuysComputer) {
 			this.buys_computer = xBuysComputer;
 			return this;
 		}
@@ -65,7 +65,7 @@ public class PersonCredentials {
 		return income;
 	}
 
-	public boolean isStudent() {
+	public String isStudent() {
 		return student;
 	}
 
@@ -73,7 +73,7 @@ public class PersonCredentials {
 		return credit_rating;
 	}
 
-	public boolean isBuys_computer() {
+	public String isBuys_computer() {
 		return buys_computer;
 	}
 }

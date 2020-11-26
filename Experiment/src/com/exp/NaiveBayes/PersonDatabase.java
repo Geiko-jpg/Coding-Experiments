@@ -14,11 +14,17 @@ public class PersonDatabase {
     private static final String DB_URL = "jdbc:mysql://localhost/people_entries"; // target database
     private static final String USERNAME = "root";
     private static final String PASS = "Verifone1";
+    private PersonCredentials pCreds;
+    
+    // - - > Constructor
+    public PersonDatabase(PersonCredentials pCreds) {
+    	this.pCreds = pCreds;
+    }
     
     // - - > INITIATE LOGGER
     private static final Logger log = Logger.getLogger(PersonDatabase.class.getName()); // optional
 
-	public void WriteToDatabase(String fName, String lName){ //PersonCredentials personInfo
+	public void WriteToDatabase(){ //PersonCredentials personInfo
         Connection conn = null;
         Statement statement = null;
         
@@ -32,7 +38,8 @@ public class PersonDatabase {
         	System.out.println("Initiate data insertion to database");
         	statement = (Statement) conn.createStatement();
         	
-        	String relay = "INSERT INTO members " + "VALUES (null, '" + fName + "', '" + lName + "')";
+        	String relay = "INSERT INTO members_data " + "VALUES (null, '" + pCreds.getAge() + "', '" + pCreds.getIncome() + "', '" +
+        	pCreds.isStudent() + "', '" + pCreds.getCredit_rating() + "', '" + pCreds.isBuys_computer() + "')";
         	statement.executeUpdate(relay);
         	
         }catch(SQLException se) {
@@ -71,7 +78,7 @@ public class PersonDatabase {
 			System.out.println("\nExtracting Data...");
 			
 			stmt = (Statement)conn.createStatement();
-			String sql = "SELECT id, firstname, lastname FROM members"; // sql command / query
+			String sql = "SELECT id, firstname, lastname FROM members_data"; // sql command / query
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			// LOOP EXTRACTION
