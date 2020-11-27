@@ -42,7 +42,6 @@ public class PredictionApp implements ActionListener{
 	private JButton submitButton, resetButton, exitButton;
 	private PersonDatabase pdb;
 	private DefaultTableModel tableModel;
-	private ArrayList<PersonCredentials>list = new ArrayList<PersonCredentials>();
 	private static InputStream myStream = null, secondStream = null;
 	
 	public PredictionApp(){
@@ -336,6 +335,19 @@ public class PredictionApp implements ActionListener{
 			// - - > TEST
 			System.out.println("INPUT: " + pCreds.getAge() + "|" + pCreds.getIncome() + "|" + pCreds.isStudent()
 			+ "|" + pCreds.getCredit_rating() + "|" + pCreds.isBuys_computer());
+			
+			// - - > UPDATE ADD TO TABLE LATEST
+			Object[] row = new Object[5];
+			row[0] = pCreds.getAge();
+			row[1] = pCreds.isStudent();
+			row[2] = pCreds.getIncome();
+			row[3] = pCreds.getCredit_rating();
+			row[4] = pCreds.isBuys_computer();
+			
+			tableModel.addRow(row);
+			
+			// - - > CALCULATE
+			
 			
 			// - - > INSERT TO DATABASE
 			pdb = new PersonDatabase(pCreds);
