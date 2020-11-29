@@ -1,6 +1,6 @@
 package com.exp.NaiveBayes;
 
-public class PersonCredentials {
+public class PersonCredentials{
 	// - - > DECLARATIONS
 	private String age;
 	private String income;
@@ -8,7 +8,7 @@ public class PersonCredentials {
 	private String credit_rating;
 	private String buys_computer;
 	
-	private PersonCredentials(){}
+	protected PersonCredentials(){}
 
 	// - - > BUILD MEMBERS
 	public static class PersonCredentialsBuilder {

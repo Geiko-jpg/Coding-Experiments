@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -42,6 +43,8 @@ public class PredictionApp implements ActionListener{
 	private JButton submitButton, resetButton, exitButton;
 	private PersonDatabase pdb;
 	private DefaultTableModel tableModel;
+	private ArrayList<PersonCredentials>list = new ArrayList<PersonCredentials>();
+	private NaiveCalculation calculate;
 	private static InputStream myStream = null, secondStream = null;
 	
 	public PredictionApp(){
@@ -287,6 +290,7 @@ public class PredictionApp implements ActionListener{
 			row[4] = pc.isBuys_computer();
 			
 			tableModel.addRow(row);
+			list.add(pc);
 		}
 	}
 
@@ -324,17 +328,26 @@ public class PredictionApp implements ActionListener{
 				nfe.printStackTrace();
 			}
 			
+			InputTransfer trans = new InputTransfer.InputTransferBuilder()
+					.setAge(ageLabel)
+					.setIncome(incomeField.getText().toString())
+					.setStudent(status)
+					.setCreditRating(creditField.getText().toString())
+					.build();
+			
+			// - - > CALCULATE
+			calculate = new NaiveCalculation(this.list, trans);
 			PersonCredentials pCreds = new PersonCredentials.PersonCredentialsBuilder()
 					.setAge(ageLabel)
 					.setIncome(incomeField.getText().toString())
 					.setStudent(status)
 					.setCreditRating(creditField.getText().toString())
-					.setBuysComputer(buys_status)
+					.setBuysComputer(calculate.calculatePrediction())
 					.build();
 			
 			// - - > TEST
 			System.out.println("INPUT: " + pCreds.getAge() + "|" + pCreds.getIncome() + "|" + pCreds.isStudent()
-			+ "|" + pCreds.getCredit_rating() + "|" + pCreds.isBuys_computer());
+			+ "|" + pCreds.getCredit_rating() + "|" + pCreds.isBuys_computer() + "\n");
 			
 			// - - > UPDATE ADD TO TABLE LATEST
 			Object[] row = new Object[5];
@@ -346,9 +359,6 @@ public class PredictionApp implements ActionListener{
 			
 			tableModel.addRow(row);
 			
-			// - - > CALCULATE
-			
-			
 			// - - > INSERT TO DATABASE
 			pdb = new PersonDatabase(pCreds);
 			pdb.WriteToDatabase();
@@ -358,6 +368,12 @@ public class PredictionApp implements ActionListener{
 			creditField.setText(null);
 			studentButtonGroup.clearSelection(); status = null;
 			buysButtonGroup.clearSelection(); buys_status = null;
+			
+			if(pCreds.isBuys_computer().equals("true")) {
+				JOptionPane.showMessageDialog(primaryFrame, "PREDICTION: USER WILL PURCHASE A COMPUTER");
+			}else {
+				JOptionPane.showMessageDialog(primaryFrame, "PREDICTION: USER WILL NOT PURCHASE A COMPUTER");
+			}
 			
 		}else if(e.getSource().equals(exitButton)) {
 			System.exit(0);
